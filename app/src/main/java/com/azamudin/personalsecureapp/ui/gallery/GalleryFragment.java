@@ -1,6 +1,7 @@
 package com.azamudin.personalsecureapp.ui.gallery;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.azamudin.personalsecureapp.entity.RealmHelper;
 import com.azamudin.personalsecureapp.entity.ReceiptItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -83,6 +85,7 @@ public class GalleryFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent i = new Intent(getContext(), DataActivity.class);
                i.putExtra("activity_type" , category.get(position));
+               i.putExtra("categoryName" , category.get(position));
                startActivity(i);
             }
         });
@@ -112,22 +115,27 @@ public class GalleryFragment extends Fragment {
         Dialog d=new Dialog(getContext());
         d.setTitle("Save to Realm");
         d.setContentView(R.layout.input_dialog);
+        d.getWindow().setLayout(600,300);
         final EditText nameeditTxt= (EditText) d.findViewById(R.id.nameEditText);
         Button saveBtn= (Button) d.findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //GET DATA
-                Category s=new Category();
-                s.setName(nameeditTxt.getText().toString());
-                //SAVE
-                RealmHelper helper=new RealmHelper(mRealm);
-                helper.save(s);
-                nameeditTxt.setText("");
-                //RETRIEVE
-                category=helper.retrieve();
-                adapter=new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,category);
-                listView.setAdapter(adapter);
+                if (nameeditTxt.getText().toString().length() == 0){
+                    Toast.makeText(getContext(), "Category cannot be blank!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Category s=new Category();
+                    s.setName(nameeditTxt.getText().toString());
+                    //SAVE
+                    RealmHelper helper=new RealmHelper(mRealm);
+                    helper.save(s);
+                    nameeditTxt.setText("");
+                    //RETRIEVE
+                    category=helper.retrieve();
+                    adapter=new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,category);
+                    listView.setAdapter(adapter);
+                }
             }
         });
         d.show();
@@ -136,6 +144,8 @@ public class GalleryFragment extends Fragment {
     private void ShowDeleteDialog(final String tv , final int position) {
         AlertDialog.Builder al=new AlertDialog.Builder(getContext());
         View view=getLayoutInflater().inflate(R.layout.delete_dialog,null);
+        al.setTitle("Delete Category");
+        al.setMessage("Are you sure you want to delete this category?");
         al.setView(view);
 
         final TextView data_id=view.findViewById(R.id.data_id);
@@ -148,17 +158,20 @@ public class GalleryFragment extends Fragment {
             public void onClick(View v) {
 //                long id= Long.parseLong(data_id.getText().toString());
                 final Category category1=mRealm.where(Category.class).equalTo("name",tv).findFirst();
+                final ReceiptItem receiptItem = mRealm.where(ReceiptItem.class).equalTo("orderNo" , tv).findFirst();
                 mRealm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
                         alertDialog.dismiss();
                         category1.deleteFromRealm();
+                        receiptItem.deleteFromRealm();
                         adapter.remove(category.get(position));
                     }
                 });
             }
         });
     }
+
 
 //    private void saveLocalImage(final String data, final String image)
 //    {

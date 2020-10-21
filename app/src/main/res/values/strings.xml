@@ -9,5 +9,8 @@
 
     <string name="menu_home">Dashboard</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_slideshow">MyProfile</string>
+
+    <string name="twitterUsername">\@joeytribbiani</string>
+    <string name="welcome_text">Welcome to personal secure app. This is only simple app for IRIS Assignment.</string>
 </resources>

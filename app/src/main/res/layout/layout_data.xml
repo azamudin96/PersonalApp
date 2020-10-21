@@ -28,12 +28,13 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="8dp"
                 android:textAlignment="center"
+                android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
             <LinearLayout
-                android:visibility="visible"
+                android:visibility="gone"
                 android:layout_marginBottom="15dip"
-                android:id="@+id/linearPhoto"
+                android:id="@+id/llPhoto"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -58,22 +59,19 @@
                     android:layout_height="300dp">
 
                     <ImageView
-                        android:id="@+id/notePhoto"
+                        android:id="@+id/saveImg"
                         android:scaleType="centerCrop"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
 
-                    <TextView
+                    <ImageView
+                        android:id="@+id/closeimg"
                         android:layout_width="wrap_content"
-                        android:id="@+id/deleteNotePhoto"
-                        android:text="DELETE PHOTO"
-                        android:paddingHorizontal="12dip"
-                        android:paddingVertical="15dip"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel"
+                        android:layout_alignParentRight="true"
                         android:background="@color/colorPrimary"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:layout_centerInParent="true"
-                        android:layout_height="wrap_content"/>
+                        app:tint="@color/white" />
 
                 </RelativeLayout>
 
@@ -109,6 +107,9 @@
                     android:layout_height="50dp"
                     android:fontFamily="sans-serif"
                     android:hint="Username"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusableInTouchMode="false"
                     android:inputType="textPersonName"
                     android:background="@null"
                     android:textStyle="italic" />
@@ -133,9 +134,35 @@
                     android:fontFamily="sans-serif"
                     android:hint="Password"
                     android:inputType="textPersonName"
+                    android:clickable="false"
+                    android:longClickable="false"
+                    android:focusableInTouchMode="false"
                     android:background="@null"
                     android:textStyle="italic" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="My Password"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:id="@+id/my_password"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Password"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:id="@+id/show_my_password">
+            </Button>
+
 
 
 

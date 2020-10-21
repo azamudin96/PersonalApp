@@ -24,7 +24,7 @@ public class AppContext extends Application
         //Realm database setup
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("myapp.realm")
+                .name("Z.realm")
                 .schemaVersion(0)
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
