@@ -3,7 +3,7 @@ package com.azamudin.personalsecureapp;
 import io.realm.RealmObject;
 
 /**
- * Created by anupamchugh on 09/02/16.
+ * Created by azamudin.
  */
 public class DataModel{
 

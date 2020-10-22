@@ -15,7 +15,7 @@ import java.util.Stack;
  * AppManager
  * Application management class, used to manage all
  * BaseActivity
- * Created by Azam
+ * Created by Azamudin
  */
 
 public class AppManager

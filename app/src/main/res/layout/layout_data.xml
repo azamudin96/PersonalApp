@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_marginBottom="100dp"
-            android:id="@+id/writeDiary"
+            android:id="@+id/ll_data1"
             android:layout_marginHorizontal="20dip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

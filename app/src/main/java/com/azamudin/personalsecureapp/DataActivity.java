@@ -151,6 +151,7 @@ public class DataActivity extends AppCompatActivity implements IPickResult {
         show_my_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (edt_password.getText().toString().length() != 0){
                 executor = ContextCompat.getMainExecutor(DataActivity.this);
                 biometricPrompt = new BiometricPrompt(DataActivity.this,
                         executor, new BiometricPrompt.AuthenticationCallback() {
@@ -203,6 +204,10 @@ public class DataActivity extends AppCompatActivity implements IPickResult {
                         .build();
 
                 biometricPrompt.authenticate(promptInfo);
+                }else
+                {
+                    Toast.makeText(DataActivity.this, "Password is empty", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

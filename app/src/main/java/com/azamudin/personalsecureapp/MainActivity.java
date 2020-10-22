@@ -2,17 +2,25 @@ package com.azamudin.personalsecureapp;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.azamudin.personalsecureapp.anim.ViewAnimation;
+import com.azamudin.personalsecureapp.entity.ReceiptItem;
+import com.azamudin.personalsecureapp.util.SharedPreferenceUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
@@ -26,10 +34,14 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     boolean isRotate = false;
+
+    AlertDialog alertDialog;
 
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
 
@@ -78,6 +90,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+
+                ShowInfo();
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (getCurrentFocus() != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -113,4 +142,12 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    private void ShowInfo() {
+        AlertDialog.Builder al=new AlertDialog.Builder(MainActivity.this);
+        View view=getLayoutInflater().inflate(R.layout.layout_info,null);
+        al.setView(view);
+
+        alertDialog=al.show();
+        }
 }

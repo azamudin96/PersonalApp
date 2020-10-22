@@ -21,8 +21,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.azamudin.personalsecureapp.R;
-import com.azamudin.personalsecureapp.UploadPhoto;
-import com.azamudin.personalsecureapp.app.AppManager;
 import com.azamudin.personalsecureapp.entity.UserProfile;
 import com.azamudin.personalsecureapp.util.SharedPreferenceUtil;
 import com.google.zxing.BarcodeFormat;
